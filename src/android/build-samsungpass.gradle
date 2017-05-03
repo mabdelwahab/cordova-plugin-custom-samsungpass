@@ -12,5 +12,5 @@ repositories {
 }
 
 dependencies {
-    compile files('libs/pass-v1.2.2.jar','libs/sdk-v1.0.0.jar')
+    runtime files('libs/pass-v1.2.2.jar','libs/sdk-v1.0.0.jar')
 }
