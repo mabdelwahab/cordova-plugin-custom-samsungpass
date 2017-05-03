@@ -88,14 +88,28 @@ public class SamsungPass extends CordovaPlugin {
                 // It is called when fingerprint identification is finished.
                 if (eventStatus == SpassFingerprint.STATUS_AUTHENTIFICATION_SUCCESS) {
                     // Identify operation succeeded with fingerprint
-                    resultJson.put("withFingerprint", true);
-                    mPluginResult = new PluginResult(PluginResult.Status.OK);
-                    mCallbackContext.success(resultJson);
+                    try {
+                        resultJson.put("withFingerprint", true);
+                        mPluginResult = new PluginResult(PluginResult.Status.OK);
+                        mCallbackContext.success(resultJson);
+                    }
+                    catch(Exception ex) {
+                        mPluginResult = new PluginResult(PluginResult.Status.ERROR);
+                        mCallbackContext.error(ex.getMessage());
+                        mCallbackContext.sendPluginResult(mPluginResult);
+                    }
                 } else if (eventStatus == SpassFingerprint.STATUS_AUTHENTIFICATION_PASSWORD_SUCCESS) {
                     // Identify operation succeeded with alternative password
-                    resultJson.put("withFingerprint", false);
-                    mPluginResult = new PluginResult(PluginResult.Status.OK);
-                    mCallbackContext.success(resultJson);
+                    try {
+                        resultJson.put("withFingerprint", false);
+                        mPluginResult = new PluginResult(PluginResult.Status.OK);
+                        mCallbackContext.success(resultJson);
+                    }
+                    catch(Exception ex) {
+                        mPluginResult = new PluginResult(PluginResult.Status.ERROR);
+                        mCallbackContext.error(ex.getMessage());
+                        mCallbackContext.sendPluginResult(mPluginResult);
+                    }
                 } else {
                     // Identify operation failed with given eventStatus. 
                     // STATUS_TIMEOUT_FAILED
@@ -177,11 +191,21 @@ public class SamsungPass extends CordovaPlugin {
         boolean mHasRegisteredFinger = mSpassFingerprint.hasRegisteredFinger();
 
         if (action.equals("availability")) {
-            resultJson.put("isAvailable", isFeatureEnabled);
-            resultJson.put("hasEnrolledFingerprints", isFeatureEnabled);
-            mPluginResult = new PluginResult(PluginResult.Status.OK);
-            mCallbackContext.success(resultJson);
-            mCallbackContext.sendPluginResult(mPluginResult);
+            try {
+                resultJson.put("isAvailable", isFeatureEnabled);
+                resultJson.put("hasEnrolledFingerprints", isFeatureEnabled);
+                mPluginResult = new PluginResult(PluginResult.Status.OK);
+                mCallbackContext.success(resultJson);
+                mCallbackContext.sendPluginResult(mPluginResult);
+                return true;
+            }
+            catch (Exception ex) {
+                mPluginResult = new PluginResult(PluginResult.Status.ERROR);
+                mCallbackContext.error(e.getMessage());
+                mCallbackContext.sendPluginResult(mPluginResult);
+                return false;
+            }
+            
             return true;
         }
         else if (action.equals("verify")) {
@@ -199,7 +223,5 @@ public class SamsungPass extends CordovaPlugin {
             mCallbackContext.sendPluginResult(mPluginResult);
             return false;
         }
-
-        return false;
     }
 }
