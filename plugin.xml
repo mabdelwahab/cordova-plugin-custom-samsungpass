@@ -30,8 +30,8 @@
 			<uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY" />
 			<uses-permission android:name="android.permission.USE_FINGERPRINT" />
 		</config-file>
-
-		<source-file src="build-samsungpass.gradle" target-dir="." />
+		
+		<framework src="build-samsungpass.gradle" custom="true" type="gradleReference"/>
 		<source-file src="src/android/SamsungPass.java" target-dir="src/com/cordova/plugin/android/samsungpass" />
 		<source-file src="libs/android/pass-v1.2.2.jar" target-dir="libs" />
 		<source-file src="libs/android/sdk-v1.0.0.jar" target-dir="libs" />

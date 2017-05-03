@@ -1,3 +1,3 @@
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    provided files('libs/pass-v1.2.2.jar','libs/sdk-v1.0.0.jar')
 }
