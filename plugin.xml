@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-samsungpass" version="0.1">
+	<name>
+		SamsungPass
+	</name>
+	<description>
+		Cordova plugin to use Samsung Pass SDK
+	</description>
+	<license>
+		Apache 2.0
+	</license>
+	<keywords>
+		cordova,plugin,android,samsungpass,authentication,fingerprint
+	</keywords>
+	<repo>
+	</repo>
+	<issue>
+	</issue>
+	<js-module src="www/samsungpass.js" name="SamsungPass">
+		<clobbers target="SamsungPass" />
+	</js-module>
+	<!-- android -->
+	<platform name="android">
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="SamsungPass">
+				<param name="android-package" value="com.cordova.plugin.samsungpass.SamsungPass" />
+			</feature>
+		</config-file>
+		<config-file target="AndroidManifest.xml" parent="/*">
+			<uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY" />
+			<uses-permission android:name="android.permission.USE_FINGERPRINT" />
+		</config-file>
+	</platform>
+</plugin>
