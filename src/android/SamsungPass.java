@@ -77,7 +77,8 @@ public class SamsungPass extends CordovaPlugin {
      * @return A PluginResult object with a status and message.
      */
     public boolean execute(final String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-
+        mCallbackContext = callbackContext;
+        
         Log.v(TAG, "SamsungPass action: " + action);
 
         listener = new SpassFingerprint.IdentifyListener() {
@@ -193,7 +194,7 @@ public class SamsungPass extends CordovaPlugin {
         if (action.equals("availability")) {
             try {
                 resultJson.put("isAvailable", isFeatureEnabled);
-                resultJson.put("hasEnrolledFingerprints", isFeatureEnabled);
+                resultJson.put("hasEnrolledFingerprints", mHasRegisteredFinger);
                 mPluginResult = new PluginResult(PluginResult.Status.OK);
                 mCallbackContext.success(resultJson);
                 mCallbackContext.sendPluginResult(mPluginResult);
