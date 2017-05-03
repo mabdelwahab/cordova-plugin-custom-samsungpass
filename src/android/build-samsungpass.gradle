@@ -1,0 +1,16 @@
+android {
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile files('libs/pass-v1.2.2.jar','libs/sdk-v1.0.0.jar')
+}
