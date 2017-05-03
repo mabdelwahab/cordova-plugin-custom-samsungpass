@@ -1,3 +1,12 @@
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+}
+
 dependencies {
     runtime files('libs/pass-v1.2.2.jar','libs/sdk-v1.0.0.jar')
 }
