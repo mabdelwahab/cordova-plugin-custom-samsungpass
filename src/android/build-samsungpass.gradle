@@ -7,9 +7,7 @@ android {
     }
 }
 
-repositories {
-    mavenCentral()
-}
+apply plugin: 'java'
 
 dependencies {
     runtime files('libs/pass-v1.2.2.jar','libs/sdk-v1.0.0.jar')
