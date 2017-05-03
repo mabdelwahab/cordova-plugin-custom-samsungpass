@@ -181,16 +181,15 @@ public class SamsungPass extends CordovaPlugin {
         boolean isFeatureEnabled = mSpass.isFeatureEnabled(Spass.DEVICE_FINGERPRINT);
         boolean mHasRegisteredFinger = mSpassFingerprint.hasRegisteredFinger();
 
-        switch (action) {
-        case "availability":
+        if (action.equals("availability")) {
             resultJson.put("isAvailable", isFeatureEnabled);
             resultJson.put("hasEnrolledFingerprints", isFeatureEnabled);
             mPluginResult = new PluginResult(PluginResult.Status.OK);
             mCallbackContext.success(resultJson);
             mCallbackContext.sendPluginResult(mPluginResult);
             return true;
-            break;
-        case "verify":
+        }
+        else if (action.equals("verify")) {
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
                     mSpassFingerprint.startIdentifyWithDialog(MainActivity.this, listener, false);
@@ -198,13 +197,12 @@ public class SamsungPass extends CordovaPlugin {
             });
             mPluginResult.setKeepCallback(true);
             return true;
-            break;
-        default:
+        }
+        else {
             mPluginResult = new PluginResult(PluginResult.Status.ERROR);
             mCallbackContext.error("Action '" + action + "' does not exist !");
             mCallbackContext.sendPluginResult(mPluginResult);
             return false;
-            break;
         }
 
         return false;
