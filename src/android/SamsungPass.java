@@ -201,7 +201,7 @@ public class SamsungPass extends CordovaPlugin {
             }
             catch (Exception ex) {
                 mPluginResult = new PluginResult(PluginResult.Status.ERROR);
-                mCallbackContext.error(e.getMessage());
+                mCallbackContext.error(ex.getMessage());
                 mCallbackContext.sendPluginResult(mPluginResult);
                 return false;
             }
