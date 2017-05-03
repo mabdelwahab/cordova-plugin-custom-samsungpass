@@ -157,7 +157,7 @@ public class SamsungPass extends CordovaPlugin {
         JSONObject resultJson = new JSONObject();
 
         try {
-            mSpass.initialize(MainActivity.this);
+            mSpass.initialize(mActivity);
         } catch (SsdkUnsupportedException e) {
             // Error handling
             mPluginResult = new PluginResult(PluginResult.Status.ERROR);
@@ -172,7 +172,7 @@ public class SamsungPass extends CordovaPlugin {
             return false;
         }
 
-        mSpassFingerprint = new SpassFingerprint(MainActivity.this);
+        mSpassFingerprint = new SpassFingerprint(mActivity);
         boolean isFeatureEnabled = mSpass.isFeatureEnabled(Spass.DEVICE_FINGERPRINT);
         boolean mHasRegisteredFinger = mSpassFingerprint.hasRegisteredFinger();
 
@@ -187,7 +187,7 @@ public class SamsungPass extends CordovaPlugin {
         else if (action.equals("verify")) {
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
-                    mSpassFingerprint.startIdentifyWithDialog(MainActivity.this, listener, false);
+                    mSpassFingerprint.startIdentifyWithDialog(mActivity, listener, false);
                 }
             });
             mPluginResult.setKeepCallback(true);
