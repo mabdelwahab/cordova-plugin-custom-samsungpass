@@ -205,8 +205,6 @@ public class SamsungPass extends CordovaPlugin {
                 mCallbackContext.sendPluginResult(mPluginResult);
                 return false;
             }
-            
-            return true;
         }
         else if (action.equals("verify")) {
             cordova.getActivity().runOnUiThread(new Runnable() {
