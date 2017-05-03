@@ -1,4 +1,4 @@
-package com.cordova.plugin.samsungpass;
+package com.cordova.plugin.android.samsungpass;
 
 import java.util.ArrayList;
 import java.util.List;
