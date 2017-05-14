@@ -2,12 +2,15 @@ package com.cordova.plugin.android.samsungpass;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -168,6 +171,21 @@ public class SamsungPass extends CordovaPlugin {
                 //It is called when identify request is completed.
             }
         };
+
+        // Get passed parameters
+        final JSONObject params = args.getJSONObject(0);
+
+        // Check if the params has language , then change the locale if it exists
+        if(params.has("lang")) {
+            final String lang = params.getString("lang");
+
+            Locale.setDefault(new Locale(lang));
+            Configuration config = new Configuration();
+            config.locale = locale;
+            Resources resources = mContext.getResources();
+            resources.updateConfiguration(config, resources.getDisplayMetrics());
+            // recreate();
+        }
 
         JSONObject resultJson = new JSONObject();
 
