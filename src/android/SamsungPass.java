@@ -179,7 +179,8 @@ public class SamsungPass extends CordovaPlugin {
         if(params.has("lang")) {
             final String lang = params.getString("lang");
 
-            Locale.setDefault(new Locale(lang));
+            Locale locale = new Locale(lang);
+            Locale.setDefault();
             Configuration config = new Configuration();
             config.locale = locale;
             Resources resources = mContext.getResources();
