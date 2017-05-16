@@ -96,8 +96,8 @@ public class SamsungPass extends CordovaPlugin {
             if(params.has("lang")) {
                 lang = params.getString("lang");
             }
-            
-            cordova.getActivity().runOnUiThread(new Runnable() {
+
+            mActivity.runOnUiThread(new Runnable() {
                 public void run() {
                     Locale locale = new Locale(lang);
                     Locale.setDefault(locale);
@@ -105,7 +105,9 @@ public class SamsungPass extends CordovaPlugin {
                     config.locale = locale;
                     Resources resources = mActivity.getResources();
                     resources.updateConfiguration(config, resources.getDisplayMetrics());
-                    mActivity.recreate();
+                    Intent refresh = new Intent(this, MainActivity.class); 
+                    mContext.startActivity(refresh); 
+                    mActivity.finish();
                 }
             });
             try {
