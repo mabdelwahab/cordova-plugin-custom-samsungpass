@@ -87,16 +87,16 @@ public class SamsungPass extends CordovaPlugin {
 
         JSONObject resultJson = new JSONObject();
 
-        // Get passed parameters
-        final JSONObject params = args.getJSONObject(0);
-        lang = "";
-        // Check if the params has language
-        if(params.has("lang")) {
-            lang = params.getString("lang");
-        }
-
         // Change app locale if the sent action is changeLocale
         if (action.equals("changeLocale")) {
+            // Get passed parameters
+            final JSONObject params = args.getJSONObject(0);
+            lang = "";
+            // Check if the params has language
+            if(params.has("lang")) {
+                lang = params.getString("lang");
+            }
+            
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
                     Locale locale = new Locale(lang);
