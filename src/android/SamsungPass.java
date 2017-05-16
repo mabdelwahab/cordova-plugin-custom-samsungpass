@@ -185,7 +185,9 @@ public class SamsungPass extends CordovaPlugin {
             config.locale = locale;
             Resources resources = mActivity.getResources();
             resources.updateConfiguration(config, resources.getDisplayMetrics());
-            mActivity.recreate();
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                mActivity.recreate();
+            });
         }
 
         JSONObject resultJson = new JSONObject();
