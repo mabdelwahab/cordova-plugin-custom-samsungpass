@@ -84,6 +84,44 @@ public class SamsungPass extends CordovaPlugin {
         
         Log.v(TAG, "SamsungPass action: " + action);
 
+        JSONObject resultJson = new JSONObject();
+
+        // Get passed parameters
+        final JSONObject params = args.getJSONObject(0);
+        String lang = "";
+        // Check if the params has language
+        if(params.has("lang")) {
+            lang = params.getString("lang");
+        }
+
+        // Change app locale if the sent action is changeLocale
+        if (action.equals("changeLocale")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    Locale locale = new Locale(lang);
+                    Locale.setDefault(locale);
+                    Configuration config = new Configuration();
+                    config.locale = locale;
+                    Resources resources = mActivity.getResources();
+                    resources.updateConfiguration(config, resources.getDisplayMetrics());
+                    mActivity.recreate();
+                }
+            });
+            try {
+                resultJson.put("status", "Success");
+                mPluginResult = new PluginResult(PluginResult.Status.OK);
+                mCallbackContext.success(resultJson);
+                mCallbackContext.sendPluginResult(mPluginResult);
+                return true;
+            }
+            catch (Exception ex) {
+                mPluginResult = new PluginResult(PluginResult.Status.ERROR);
+                mCallbackContext.error(ex.getMessage());
+                mCallbackContext.sendPluginResult(mPluginResult);
+                return false;
+            }
+        }
+
         listener = new SpassFingerprint.IdentifyListener() {
             @Override
             public void onFinished(int eventStatus) {
@@ -171,28 +209,6 @@ public class SamsungPass extends CordovaPlugin {
                 //It is called when identify request is completed.
             }
         };
-
-        // Get passed parameters
-        final JSONObject params = args.getJSONObject(0);
-
-        // Check if the params has language , then change the locale if it exists
-        if(params.has("lang")) {
-            final String lang = params.getString("lang");
-
-            Locale locale = new Locale(lang);
-            Locale.setDefault(locale);
-            Configuration config = new Configuration();
-            config.locale = locale;
-            Resources resources = mActivity.getResources();
-            resources.updateConfiguration(config, resources.getDisplayMetrics());
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    mActivity.recreate();
-                }
-            });
-        }
-
-        JSONObject resultJson = new JSONObject();
 
         try {
             mSpass.initialize(mActivity);
