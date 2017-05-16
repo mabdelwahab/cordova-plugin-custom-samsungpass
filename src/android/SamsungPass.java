@@ -186,7 +186,9 @@ public class SamsungPass extends CordovaPlugin {
             Resources resources = mActivity.getResources();
             resources.updateConfiguration(config, resources.getDisplayMetrics());
             cordova.getActivity().runOnUiThread(new Runnable() {
-                mActivity.recreate();
+                public void run() {
+                    mActivity.recreate();
+                }
             });
         }
 
