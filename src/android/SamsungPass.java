@@ -105,8 +105,8 @@ public class SamsungPass extends CordovaPlugin {
                     config.locale = locale;
                     Resources resources = mActivity.getResources();
                     resources.updateConfiguration(config, resources.getDisplayMetrics());
-                    Intent refresh = new Intent(this, MainActivity.class); 
-                    mContext.startActivity(refresh); 
+                    Intent refresh = new Intent(mContext, mActivity); 
+                    mActivity.startActivity(refresh); 
                     mActivity.finish();
                 }
             });
