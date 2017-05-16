@@ -24,7 +24,7 @@ SamsungPass.prototype.isAvailable = function(successCallback, errorCallback) {
     );
 };
 
-SamsungPass.prototype.isAvailable = function(lang, successCallback, errorCallback) {
+SamsungPass.prototype.changeLocale = function(lang, successCallback, errorCallback) {
     cordova.exec(
         successCallback,
         errorCallback,
