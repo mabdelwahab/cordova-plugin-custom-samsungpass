@@ -14,13 +14,13 @@ SamsungPass.prototype.verifyFingerprint = function(params, successCallback, erro
     );
 };
 
-SamsungPass.prototype.isAvailable = function(successCallback, errorCallback) {
+SamsungPass.prototype.isAvailable = function(lang, successCallback, errorCallback) {
     cordova.exec(
         successCallback,
         errorCallback,
         "SamsungPass", // Java Class
         "availability", // action
-        [{}]
+        [{lang: lang}]
     );
 };
 
