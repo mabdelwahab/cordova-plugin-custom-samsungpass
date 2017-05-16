@@ -38,6 +38,7 @@ public class SamsungPass extends CordovaPlugin {
     public static String packageName;
     public static Context mContext;
     public static Activity mActivity;
+    public static String lang;
 
     public static SpassFingerprint mSpassFingerprint;
     public static Spass mSpass;
@@ -88,7 +89,7 @@ public class SamsungPass extends CordovaPlugin {
 
         // Get passed parameters
         final JSONObject params = args.getJSONObject(0);
-        String lang = "";
+        lang = "";
         // Check if the params has language
         if(params.has("lang")) {
             lang = params.getString("lang");
